@@ -674,3 +674,6 @@ macro_rules! read_bytes_vec_vertical {
         v
     }};
 }
+fn type_of<T>(_: &T) -> &'static str {
+    std::any::type_name::<T>()
+}
