@@ -23,18 +23,17 @@ use num_integer::*;
 use num_traits::clamp;
 use permutohedron::factorial;
 use proconio::{
-    fastout,
-    input,
-    marker::{Bytes, Chars, Isize1, Usize1},
-    source::line::LineSource,
+  fastout, input,
+  marker::{Bytes, Chars, Isize1, Usize1},
+  source::line::LineSource,
 };
 use std::{
-    cmp::Reverse,
-    collections::{BTreeMap, BTreeSet, BinaryHeap, HashMap, HashSet, VecDeque},
-    f64::{self, consts::PI},
-    io::{self, BufReader},
-    iter::FromIterator,
-    mem::swap,
+  cmp::Reverse,
+  collections::{BTreeMap, BTreeSet, BinaryHeap, HashMap, HashSet, VecDeque},
+  f64::{self, consts::PI},
+  io::{self, BufReader},
+  iter::FromIterator,
+  mem::swap,
 };
 use superslice::Ext;
 
@@ -48,17 +47,40 @@ pub type fsize = f64;
 #[cfg(target_pointer_width = "32")]
 pub type fsize = f32;
 
+fn type_of<T>(_: &T) -> &'static str {
+  std::any::type_name::<T>()
+}
 
 #[fastout]
 fn main() {
+  input! {
+      n: i64,
+      s: Chars,
+      q: i64,
+  }
+  let mut vec = vec!['0'; 200];
+  let mut ans = "".to_string();
+  for i in 0..q {
     input! {
-        n: usize
+        a: char,
+        b: char,
     }
-    for i in 0..n*2+1{
-        if i%2 == 1{
-            print!("{}", 0);
-        }
-
-        else{print!("{}", 1);}
+    for j in 0..200 {
+      if vec[j] == a {
+        vec[j] = b;
+      }
     }
+     if vec[a as usize] == '0' {
+        vec[a as usize] = b;
+     }
+  }
+  for i in 0..s.len() {
+    if vec[s[i] as usize] == '0' {
+      ans.push(s[i]);
+    }
+    else {
+        ans.push(vec[s[i] as usize]);
+    }
+  }
+  println!("{}", ans);
 }

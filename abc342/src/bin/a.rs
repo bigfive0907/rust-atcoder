@@ -23,18 +23,17 @@ use num_integer::*;
 use num_traits::clamp;
 use permutohedron::factorial;
 use proconio::{
-    fastout,
-    input,
-    marker::{Bytes, Chars, Isize1, Usize1},
-    source::line::LineSource,
+  fastout, input,
+  marker::{Bytes, Chars, Isize1, Usize1},
+  source::line::LineSource,
 };
 use std::{
-    cmp::Reverse,
-    collections::{BTreeMap, BTreeSet, BinaryHeap, HashMap, HashSet, VecDeque},
-    f64::{self, consts::PI},
-    io::{self, BufReader},
-    iter::FromIterator,
-    mem::swap,
+  cmp::Reverse,
+  collections::{BTreeMap, BTreeSet, BinaryHeap, HashMap, HashSet, VecDeque},
+  f64::{self, consts::PI},
+  io::{self, BufReader},
+  iter::FromIterator,
+  mem::swap,
 };
 use superslice::Ext;
 
@@ -48,17 +47,31 @@ pub type fsize = f64;
 #[cfg(target_pointer_width = "32")]
 pub type fsize = f32;
 
+fn type_of<T>(_: &T) -> &'static str {
+  std::any::type_name::<T>()
+}
 
 #[fastout]
 fn main() {
-    input! {
-        n: usize
+  input! {
+      s: Chars,
+  }
+  let mut key;
+  if s.get(0) != s.get(1) {
+    if s.get(1) == s.get(2) {
+      println!("{}", 1);
+      return;
+    } else {
+      println!("{}", 2);
+      return;
     }
-    for i in 0..n*2+1{
-        if i%2 == 1{
-            print!("{}", 0);
-        }
-
-        else{print!("{}", 1);}
+  } else {
+    key = s.get(0);
+  }
+  for i in 0..s.len() {
+    if s.get(i) != key {
+      println!("{}", i+1);
+      return;
     }
+  }
 }

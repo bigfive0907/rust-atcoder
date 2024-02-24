@@ -48,17 +48,11 @@ pub type fsize = f64;
 #[cfg(target_pointer_width = "32")]
 pub type fsize = f32;
 
+fn type_of<T>(_: &T) -> &'static str {
+    std::any::type_name::<T>()
+}
 
 #[fastout]
 fn main() {
-    input! {
-        n: usize
-    }
-    for i in 0..n*2+1{
-        if i%2 == 1{
-            print!("{}", 0);
-        }
-
-        else{print!("{}", 1);}
-    }
+    input! {}
 }

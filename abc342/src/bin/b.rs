@@ -29,7 +29,7 @@ use proconio::{
     source::line::LineSource,
 };
 use std::{
-    cmp::Reverse,
+    cmp::{Reverse, max, min},
     collections::{BTreeMap, BTreeSet, BinaryHeap, HashMap, HashSet, VecDeque},
     f64::{self, consts::PI},
     io::{self, BufReader},
@@ -48,17 +48,39 @@ pub type fsize = f64;
 #[cfg(target_pointer_width = "32")]
 pub type fsize = f32;
 
+fn type_of<T>(_: &T) -> &'static str {
+    std::any::type_name::<T>()
+}
 
 #[fastout]
 fn main() {
     input! {
-        n: usize
-    }
-    for i in 0..n*2+1{
-        if i%2 == 1{
-            print!("{}", 0);
+        n: i64,
+        arr: [i64; n],
+        q: i64,
         }
-
-        else{print!("{}", 1);}
+    for i in 0..q {
+        input! {
+            a: i64,
+            b: i64,
+        }
+        let mut pos_a = 0;
+        let mut pos_b = 0;
+        for i in 0..arr.len() {
+            if arr[i] == a {
+                pos_a = i;
+            }
+            if arr[i] == b {
+                pos_b = i;
+            }
+        }
+        let ans ;
+        if pos_a > pos_b {
+            ans = b;
+        }else{
+            ans = a;
+        }
+        println!("{}", ans);
     }
 }
+

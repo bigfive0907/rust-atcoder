@@ -23,18 +23,17 @@ use num_integer::*;
 use num_traits::clamp;
 use permutohedron::factorial;
 use proconio::{
-    fastout,
-    input,
-    marker::{Bytes, Chars, Isize1, Usize1},
-    source::line::LineSource,
+  fastout, input,
+  marker::{Bytes, Chars, Isize1, Usize1},
+  source::line::LineSource,
 };
 use std::{
-    cmp::Reverse,
-    collections::{BTreeMap, BTreeSet, BinaryHeap, HashMap, HashSet, VecDeque},
-    f64::{self, consts::PI},
-    io::{self, BufReader},
-    iter::FromIterator,
-    mem::swap,
+  cmp::Reverse,
+  collections::{BTreeMap, BTreeSet, BinaryHeap, HashMap, HashSet, VecDeque},
+  f64::{self, consts::PI},
+  io::{self, BufReader},
+  iter::FromIterator,
+  mem::swap,
 };
 use superslice::Ext;
 
@@ -48,17 +47,34 @@ pub type fsize = f64;
 #[cfg(target_pointer_width = "32")]
 pub type fsize = f32;
 
+fn type_of<T>(_: &T) -> &'static str {
+  std::any::type_name::<T>()
+}
 
 #[fastout]
-fn main() {
-    input! {
-        n: usize
-    }
-    for i in 0..n*2+1{
-        if i%2 == 1{
-            print!("{}", 0);
-        }
 
-        else{print!("{}", 1);}
+fn main() {
+  input! {
+      n: usize,
+      mut a: [usize; n],
+  }
+  let mut vec = vec![0; 200010];
+  for i in 0..n {
+    vec[a[i]] += 1;
+  }
+  let mut count = vec[0] * (n - vec[0]);
+  for i in 1..500 {
+    for j in 0..n {
+      if a[j] == 0 {
+        continue;
+      }
+      if i * i % a[j] == 0 {
+        //対象の個数を追加する
+
+        count += vec[i * i / a[j]];
+        println!("i: {}, j: {}", i, j);
+      }
     }
+  }
+  println!("{}", count);
 }
