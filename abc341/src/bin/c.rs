@@ -54,18 +54,19 @@ fn main() {
       w: usize,
       n: usize,
       t: Chars,
+      mut s: [Chars;h],
   }
   
-  let mut s = vec![vec!['#'; w]; h];
-  for i in 0..h {
+  // let mut s = vec![vec!['#'; w]; h];
+  /* for i in 0..h {
     input! {
-        a: String,
+        mut s: [[char; w];h],
     }
     for j in 0..w {
       let b = a.chars().nth(j).unwrap();
       s[i][j] = b;
     }
-  }
+  } */
 
   let mut count = 0;
   for i in 1..h {
