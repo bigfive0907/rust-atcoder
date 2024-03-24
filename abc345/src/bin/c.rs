@@ -28,5 +28,24 @@ pub type Graph = Vec<Vec<usize>>;
 
 #[fastout]
 fn main() {
-    input! {}
+    input! {
+        s:Chars,
+    }
+    let mut map:HashMap<char, usize> = HashMap::new();
+    let mut ans = s.len()*s.len()+1;
+    let mut flag = false;
+    for i in 0..s.len() {
+        *map.entry(s[i]).or_insert(0) += 1;
+    }
+    for k in &map {
+        if k.1 > &1 {
+            flag = true;
+        }
+        ans -= k.1*k.1;
+    }
+    ans /= 2;
+    if flag {
+        ans += 1;
+    }
+    println!("{}",ans);
 }
